@@ -1,0 +1,15 @@
+lockfileVersion: 5.4
+
+specifiers:
+  simple-git-hooks: ^2.8.1
+
+devDependencies:
+  simple-git-hooks: 2.8.1
+
+packages:
+
+  /simple-git-hooks/2.8.1:
+    resolution: {integrity: sha512-DYpcVR1AGtSfFUNzlBdHrQGPsOhuuEJ/FkmPOOlFysP60AHd3nsEpkGq/QEOdtUyT1Qhk7w9oLmFoMG+75BDog==}
+    hasBin: true
+    requiresBuild: true
+    dev: true
