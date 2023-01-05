@@ -7,9 +7,11 @@
     "preinstall": "node ./scripts/preinstall.js",
     "postinstall": "simple-git-hooks",
     "commit": "git cz",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "lint": "eslint ."
   },
   "keywords": [],
+  "type": "module",
   "author": "",
   "license": "ISC",
   "engines": {
@@ -18,11 +20,15 @@
   "packageManager": "pnpm@7.5.1",
   "devDependencies": {
     "@commitlint/cli": "^17.4.0",
+    "@typescript-eslint/eslint-plugin": "^5.48.0",
     "commitizen": "^4.2.6",
     "commitlint-config-cz": "^0.13.3",
     "cz-customizable": "^7.0.0",
+    "eslint": "^8.31.0",
     "husky": "^8.0.3",
-    "simple-git-hooks": "^2.8.1"
+    "picocolors": "^1.0.0",
+    "simple-git-hooks": "^2.8.1",
+    "typescript": "^4.9.4"
   },
   "config": {
     "commitizen": {
