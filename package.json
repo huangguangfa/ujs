@@ -6,7 +6,8 @@
   "scripts": {
     "preinstall": "node ./scripts/preinstall.js",
     "postinstall": "simple-git-hooks",
-    "commit": "git cz"
+    "commit": "git cz",
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "",
