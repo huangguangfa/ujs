@@ -7,11 +7,9 @@
     "preinstall": "node ./scripts/preinstall.js",
     "postinstall": "simple-git-hooks",
     "commit": "git cz",
-    "prepare": "husky install",
     "lint": "eslint ."
   },
   "keywords": [],
-  "type": "module",
   "author": "",
   "license": "ISC",
   "engines": {
@@ -21,6 +19,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.4.0",
     "@typescript-eslint/eslint-plugin": "^5.48.0",
+    "@typescript-eslint/parser": "^5.48.0",
     "commitizen": "^4.2.6",
     "commitlint-config-cz": "^0.13.3",
     "cz-customizable": "^7.0.0",
