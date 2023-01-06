@@ -1,9 +1,9 @@
-const a = "111";
+const a = '111'
 
-const fun = () => "a1";
+const fun = () => 'a1'
 
-debugger;
+debugger
 
-if (a === "1") {
-  console.log("111");
+if (a === '1') {
+  console.log('111')
 }

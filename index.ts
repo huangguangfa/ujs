@@ -1,7 +1,5 @@
-const a = "1";
+const a = '3333'
 
-const fun = () => "11";
+console.log(a)
 
-debugger
-
-export {};
+export {}
