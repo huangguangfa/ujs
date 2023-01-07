@@ -4,12 +4,24 @@
   "description": "",
   "main": "index.js",
   "bin": {
-    "umi": "bin/ujs.js"
+    "ujs": "bin/ujs.js"
   },
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "rimraf dist && pnpm run build-bundle -w",
+    "build-bundle": "rollup --config rollup.config.ts --configPlugin typescript"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.20.12",
+    "@babel/parser": "^7.20.7",
+    "@babel/types": "^7.20.7",
+    "@rollup/plugin-babel": "^6.0.3",
+    "@rollup/plugin-commonjs": "^24.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@rollup/plugin-typescript": "^10.0.1",
+    "rollup": "^3.9.1"
+  }
 }
