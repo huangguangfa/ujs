@@ -18,4 +18,5 @@ export default defineConfig({
       js: `.${format}.js`,
     }
   },
+  plugins: [],
 })

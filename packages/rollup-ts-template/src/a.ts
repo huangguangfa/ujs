@@ -6,3 +6,5 @@ export const arrowCallback = (s: number) => {
     }, 2000)
   })
 }
+
+console.log('111')
