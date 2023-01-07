@@ -1,5 +1,6 @@
 import path from 'node:path'
 import { defineConfig } from 'rollup'
+import json from '@rollup/plugin-json'
 import typescript from '@rollup/plugin-typescript'
 import commonjs from '@rollup/plugin-commonjs'
 import nodeResolve from '@rollup/plugin-node-resolve'
@@ -15,8 +16,8 @@ const sharedNodeOptions = defineConfig({
   },
   output: {
     dir: path.resolve('dist'),
-    entryFileNames: `node/[name].js`,
-    chunkFileNames: 'node/chunks/dep-[hash].js',
+    entryFileNames: `[name].js`,
+    chunkFileNames: 'chunks/dep-[hash].js',
     exports: 'named',
     format: 'esm',
     externalLiveBindings: false,
@@ -48,18 +49,13 @@ function createNodeConfig(isProduction: boolean) {
       sourcemap: !isProduction,
     },
     external: ['fsevents'],
-    plugins: createNodePlugins(
-      isProduction,
-      !isProduction,
-      isProduction ? false : path.resolve('dist/node')
-    ),
+    plugins: createNodePlugins(isProduction, !isProduction),
   })
 }
 
 function createNodePlugins(
   isProduction: boolean,
-  sourceMap: boolean,
-  declarationDir: string | false
+  sourceMap: boolean
 ): Plugin[] {
   return [
     commonjs(),
@@ -67,9 +63,8 @@ function createNodePlugins(
     nodeResolve({ preferBuiltins: true }),
     typescript({
       sourceMap,
-      declaration: declarationDir !== false,
-      declarationDir: declarationDir !== false ? declarationDir : undefined,
     }),
+    json(),
   ]
 }
 
