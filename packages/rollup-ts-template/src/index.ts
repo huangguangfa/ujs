@@ -1,7 +1,11 @@
 import { arrowCallback } from './a'
 
-function tsupfn(num: number) {
-  return num
+interface Num {
+  m: Number
+}
+
+function tsupfn(num: Num) {
+  return num.m
 }
 
 export { arrowCallback, tsupfn }

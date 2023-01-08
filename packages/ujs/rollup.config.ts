@@ -1,4 +1,5 @@
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'rollup'
 import json from '@rollup/plugin-json'
 import typescript from '@rollup/plugin-typescript'
@@ -7,6 +8,8 @@ import nodeResolve from '@rollup/plugin-node-resolve'
 import { babel } from '@rollup/plugin-babel'
 
 import type { Plugin, RollupOptions } from 'rollup'
+
+const __dirname = fileURLToPath(new URL('.', import.meta.url))
 
 const sharedNodeOptions = defineConfig({
   treeshake: {
@@ -41,14 +44,14 @@ function createNodeConfig(isProduction: boolean) {
   return defineConfig({
     ...sharedNodeOptions,
     input: {
-      index: path.resolve('src/index.ts'),
-      cli: path.resolve('src/cli/cli.ts'),
+      index: path.resolve(__dirname, 'src/index.ts'),
+      cli: path.resolve(__dirname, 'src/cli/cli.ts'),
     },
     output: {
       ...sharedNodeOptions.output,
       sourcemap: !isProduction,
     },
-    external: ['fsevents'],
+    external: ['fsevents', 'esbuild', 'rollup'],
     plugins: createNodePlugins(isProduction, !isProduction),
   })
 }
@@ -58,13 +61,11 @@ function createNodePlugins(
   sourceMap: boolean
 ): Plugin[] {
   return [
-    commonjs(),
     babel({ babelHelpers: 'bundled' }),
     nodeResolve({ preferBuiltins: true }),
-    typescript({
-      sourceMap,
-    }),
+    typescript({ sourceMap }),
     json(),
+    commonjs(),
   ]
 }
 

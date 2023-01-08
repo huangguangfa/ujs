@@ -1,7 +1,7 @@
 import { cac } from 'cac'
 import colors from 'picocolors'
-
-import { version } from '../../package.json'
+import { lookupFile } from '../utils'
+const pkg = lookupFile('', ['package.json'])
 
 const cli = cac('ujs')
 
@@ -11,7 +11,9 @@ cli
   .alias('serve')
   .alias('dev')
   .action(async () => {
-    console.log(colors.red('执行dev指令'))
+    console.log(colors.green('执行dev指令'))
+    const { createServer } = await import('../server')
+    await createServer()
   })
 
 // build
@@ -25,5 +27,5 @@ cli
   })
 
 cli.help()
-cli.version(version)
+cli.version(!!pkg && JSON.parse(pkg).version)
 cli.parse()
