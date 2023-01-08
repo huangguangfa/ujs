@@ -2,10 +2,12 @@
   "name": "ujs",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "bin": {
     "ujs": "bin/ujs.js"
   },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "type": "module",
   "scripts": {
     "dev": "rimraf dist && pnpm run build-bundle -w",
@@ -23,7 +25,10 @@
     "@rollup/plugin-json": "^6.0.0",
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-typescript": "^10.0.1",
-    "cac": "^6.7.14",
+    "cac": "^6.7.14"
+  },
+  "dependencies": {
+    "esbuild": "^0.16.15",
     "rollup": "^3.9.1"
   }
 }

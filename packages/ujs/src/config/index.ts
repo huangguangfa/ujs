@@ -22,6 +22,7 @@ export interface UserConfig {
 export type ResolvedConfig = Readonly<
   Omit<UserConfig, 'plugins'> & {
     env?: string
+    configFile: string | undefined | false
   }
 >
 
@@ -66,18 +67,18 @@ export async function resolveConfig(
       configFile,
       config.root
     )
-    console.log('loadResult', loadResult)
+    if (loadResult) {
+      config = loadResult.config
+      configFile = loadResult.path
+    }
   }
-  // if (loadResult) {
-  //   // 合并配置、用户可能会在指令里面添加一些配置 --xxx系列 、指令的配置权重会大于配置文件的规则
-  //   config = mergeConfig(loadResult.config, config)
-  //   // 配置文件地址
-  //   configFile = loadResult.path
-  //   // 依赖bundle关系
-  //   configFileDependencies = loadResult.dependencies
-  // }
 
-  return {}
+  const resolved = {
+    ...config,
+    configFile,
+  }
+
+  return resolved
 }
 
 export async function loadConfigFromFile(
