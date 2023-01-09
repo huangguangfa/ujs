@@ -11,19 +11,22 @@ cli
   .alias('serve')
   .alias('dev')
   .action(async () => {
-    console.log(colors.green('执行dev指令'))
+    console.log(colors.green('【dev】-----执行dev指令'))
     const { createServer } = await import('../server')
     await createServer()
   })
 
 // build
+cli.command('build [root]', 'build for production').action(() => {
+  console.log(colors.green('【build】-----执行build指令'))
+})
+
+// eject
 cli
-  .command('build [root]', 'build for production')
-  .option('--target <target>', `[string] transpile target (default: 'modules')`)
-  .option('--outDir <dir>', `[string] output directory (default: dist)`)
-  .option('-w, --watch', `[boolean] rebuilds when modules have changed on disk`)
-  .action(async () => {
-    console.log(colors.red('执行build指令'))
+  .command('eject')
+  .alias('e')
+  .action(() => {
+    console.log(colors.green('【eject】-----弹出运行配置'))
   })
 
 cli.help()

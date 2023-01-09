@@ -1,4 +1,1 @@
-export const DEFAULT_CONFIG_FILES = [
-  'ujs.config.js',
-  'ujs.config.ts',
-]
+export const DEFAULT_CONFIG_FILES = ['ujs.config.js', 'ujs.config.ts']

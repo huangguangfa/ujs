@@ -3,10 +3,7 @@ module.exports = {
     { value: "feat", name: "feat 🍄:    新增新的特性" },
     { value: "fix", name: "fix 🐛:    修复 BUG" },
     { value: "docs", name: "docs 📄:    修改文档、注释" },
-    {
-      value: "refactor",
-      name: "refactor 🎸:    代码重构，注意和特性、修复区分开",
-    },
+    { value: "refactor", name: "refactor 🎸:    代码重构，注意和特性、修复区分开"},
     { value: "perf", name: "perf ⚡:    提升性能" },
     { value: "test", name: "test 👀:    添加一个测试" },
     { value: "tool", name: "tool 🚗:    开发工具变动(构建、脚手架工具等)" },

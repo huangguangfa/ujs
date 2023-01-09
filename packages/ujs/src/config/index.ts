@@ -49,7 +49,6 @@ export async function resolveConfig(
   console.log('defaultMode', defaultMode)
   let config = inlineConfig
   let mode = inlineConfig.mode || defaultMode
-
   if (mode === 'production') {
     process.env.NODE_ENV = 'production'
   }

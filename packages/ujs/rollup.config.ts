@@ -8,7 +8,6 @@ import nodeResolve from '@rollup/plugin-node-resolve'
 import { babel } from '@rollup/plugin-babel'
 
 import type { Plugin, RollupOptions } from 'rollup'
-
 const __dirname = fileURLToPath(new URL('.', import.meta.url))
 
 const sharedNodeOptions = defineConfig({
@@ -18,7 +17,7 @@ const sharedNodeOptions = defineConfig({
     tryCatchDeoptimization: false,
   },
   output: {
-    dir: path.resolve('dist'),
+    dir: path.resolve(__dirname, 'dist'),
     entryFileNames: `[name].js`,
     chunkFileNames: 'chunks/dep-[hash].js',
     exports: 'named',
@@ -51,7 +50,7 @@ function createNodeConfig(isProduction: boolean) {
       ...sharedNodeOptions.output,
       sourcemap: !isProduction,
     },
-    external: ['fsevents', 'esbuild', 'rollup'],
+    external: ['esbuild', 'rollup'],
     plugins: createNodePlugins(isProduction, !isProduction),
   })
 }
@@ -63,7 +62,23 @@ function createNodePlugins(
   return [
     babel({ babelHelpers: 'bundled' }),
     nodeResolve({ preferBuiltins: true }),
-    typescript({ sourceMap }),
+    typescript({
+      sourceMap,
+      target: 'ES2020',
+      module: 'ESNext',
+      moduleResolution: 'node',
+      strict: true,
+      declaration: true,
+      noImplicitOverride: true,
+      noUnusedLocals: true,
+      esModuleInterop: true,
+      useUnknownInCatchVariables: false,
+      include: ['./', '../../types'],
+      exclude: ['**/__tests__'],
+      compilerOptions: {
+        lib: ['ESNext', 'DOM'],
+      },
+    }),
     json(),
     commonjs(),
   ]

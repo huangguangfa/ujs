@@ -7,5 +7,9 @@ export default {
       path: 'user',
       component: '@/user/index',
     },
+    {
+      path: 'list',
+      component: '@/user/list',
+    },
   ],
 }

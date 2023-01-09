@@ -5,7 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "ujs dev"
+    "dev": "ujs dev",
+    "build": "ujs build"
   },
   "keywords": [],
   "author": "",

@@ -1,9 +1,9 @@
 console.log('ujs')
 
-export interface Ujs {
+export type Ujs = {
   name: string
 }
 
-export function ujs(config: Ujs) {
-  return config.name
+export function defineConfig(config: Ujs) {
+  return config
 }
