@@ -1,12 +1,14 @@
 {
-  "name": "@ujs/rollup-ts-template",
+  "name": "create-ujs",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "dev": "rimraf dist && pnpm run build-bundle -w",
     "build-bundle": "rollup --config rollup.config.ts --configPlugin typescript"
   },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "type": "module",
   "keywords": [],
   "author": "",
@@ -15,15 +17,10 @@
     "rollup": "^3.9.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.12",
-    "@babel/parser": "^7.20.7",
-    "@babel/types": "^7.20.7",
     "@rollup/plugin-babel": "^6.0.3",
     "@rollup/plugin-commonjs": "^24.0.0",
-    "@rollup/plugin-json": "^6.0.0",
-    "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-typescript": "^8.5.0",
-    "rimraf": "^3.0.2",
-    "rollup-plugin-babel": "^4.4.0"
+    "minimist": "^1.2.7",
+    "prompts": "^2.4.2"
   }
 }
