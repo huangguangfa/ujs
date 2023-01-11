@@ -9,6 +9,6 @@
   "keywords": [],
   "license": "ISC",
   "dependencies": {
-    "ujs": "workspace:^1.0.0"
+    "ujs": "workspace:*"
   }
 }

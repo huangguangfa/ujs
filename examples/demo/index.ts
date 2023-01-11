@@ -1,3 +1,5 @@
-import { ujs } from 'ujs'
+import { defineConfig } from 'ujs'
 
-ujs()
+defineConfig({
+  name: '1',
+})

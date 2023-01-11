@@ -25,18 +25,6 @@ const sharedNodeOptions = defineConfig({
     externalLiveBindings: false,
     freeze: false,
   },
-  onwarn(warning, warn) {
-    if (warning.message.includes('Package subpath')) {
-      return
-    }
-    if (warning.message.includes('Use of eval')) {
-      return
-    }
-    if (warning.message.includes('Circular dependency')) {
-      return
-    }
-    warn(warning)
-  },
 })
 
 function createNodeConfig(isProduction: boolean) {
@@ -61,24 +49,15 @@ function createNodePlugins(
 ): Plugin[] {
   return [
     babel({ babelHelpers: 'bundled' }),
-    nodeResolve({ preferBuiltins: true }),
     typescript({
       sourceMap,
-      target: 'ES2020',
-      module: 'ESNext',
-      moduleResolution: 'node',
-      strict: true,
       declaration: true,
-      noImplicitOverride: true,
-      noUnusedLocals: true,
-      esModuleInterop: true,
-      useUnknownInCatchVariables: false,
-      include: ['./', '../../types'],
-      exclude: ['**/__tests__'],
-      compilerOptions: {
-        lib: ['ESNext', 'DOM'],
-      },
+      declarationDir: path.resolve(__dirname, 'dist'),
+      emitDeclarationOnly: true,
+      noEmitOnError: true,
+      filterRoot: './src',
     }),
+    nodeResolve({ preferBuiltins: true }),
     json(),
     commonjs(),
   ]
