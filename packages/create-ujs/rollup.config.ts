@@ -4,6 +4,7 @@ import { defineConfig } from 'rollup'
 import typescript from '@rollup/plugin-typescript'
 import commonjs from '@rollup/plugin-commonjs'
 import { babel } from '@rollup/plugin-babel'
+import copy from 'rollup-plugin-copy'
 
 import type { Plugin, RollupOptions } from 'rollup'
 const __dirname = fileURLToPath(new URL('.', import.meta.url))
@@ -29,7 +30,7 @@ function createNodeConfig(isProduction: boolean) {
   return defineConfig({
     ...sharedNodeOptions,
     input: {
-      index: path.resolve(__dirname, 'index.ts'),
+      index: path.resolve(__dirname, 'src/index.ts'),
     },
     output: {
       ...sharedNodeOptions.output,
@@ -46,6 +47,14 @@ function createNodePlugins(
 ): Plugin[] {
   return [
     babel({ babelHelpers: 'bundled' }),
+    copy({
+      targets: [
+        {
+          src: './src/template',
+          dest: 'dist',
+        },
+      ],
+    }),
     typescript({
       sourceMap,
       declaration: true,

@@ -1,0 +1,10 @@
+{
+  "private": true,
+  "scripts": {
+    "dev": "ujs dev",
+    "build": "ujs build"
+  },
+  "dependencies": {
+    "ujs": "workspace:*"
+  }
+}
