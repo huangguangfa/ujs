@@ -40,6 +40,12 @@ importers:
     dependencies:
       ujs: link:../../packages/ujs
 
+  examples/test:
+    specifiers:
+      ujs: workspace:*
+    dependencies:
+      ujs: link:../../packages/ujs
+
   examples/ujs-vue:
     specifiers:
       ujs: workspace:^1.0.0
@@ -74,6 +80,18 @@ importers:
       minimist: 1.2.7
       prompts: 2.4.2
       rollup-plugin-copy: 3.4.0
+
+  packages/create-ujs/dist/template/vue/base:
+    specifiers:
+      ujs: workspace:*
+    dependencies:
+      ujs: link:../../../../../ujs
+
+  packages/create-ujs/src/template/vue/base:
+    specifiers:
+      ujs: workspace:*
+    dependencies:
+      ujs: link:../../../../../ujs
 
   packages/renderer-vue:
     specifiers: {}

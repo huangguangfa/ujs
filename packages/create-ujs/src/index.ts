@@ -4,7 +4,7 @@ import * as path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import minimist from 'minimist'
 import prompts from 'prompts'
-import { green, bold } from 'kolorist'
+import { green, bold, red } from 'kolorist'
 
 import { emptyDir } from './utils'
 import { generateTemplate } from './generate'
@@ -12,6 +12,9 @@ import { generateTemplate } from './generate'
 const __dirname = fileURLToPath(new URL('.', import.meta.url))
 
 async function init() {
+  console.log()
+  console.log(bold(green('create ujs cli ~')))
+  console.log()
   const cwd = process.cwd()
   const argv = minimist(process.argv.slice(2), {
     string: ['_'],
@@ -25,50 +28,58 @@ async function init() {
     needsTypeScript?: boolean
     needsKsUi?: boolean
     needsKsUtils?: boolean
+    projectType?: boolean
   } = {}
   try {
-    result = await prompts([
+    result = await prompts(
+      [
+        {
+          name: 'projectName',
+          type: 'text',
+          message: '输入您的项目名称:',
+          initial: defaultProjectName,
+          onState: (state) =>
+            (targetDir = String(state.value).trim() || defaultProjectName),
+        },
+        {
+          name: 'needsAppointmentRouter',
+          type: 'toggle',
+          message: '是否开启约定式路由？',
+          initial: true,
+          active: 'Yes',
+          inactive: 'No',
+        },
+        {
+          name: 'needsTypeScript',
+          type: 'toggle',
+          message: '是否启用typescript',
+          initial: false,
+          active: 'Yes',
+          inactive: 'No',
+        },
+        {
+          name: 'needsKsUi',
+          type: 'toggle',
+          message: '是否需要KsUi',
+          initial: false,
+          active: 'Yes',
+          inactive: 'No',
+        },
+        {
+          name: 'needsKsUtils',
+          type: 'toggle',
+          message: '是否需要KsUtils',
+          initial: false,
+          active: 'Yes',
+          inactive: 'No',
+        },
+      ],
       {
-        name: 'projectName',
-        type: 'text',
-        message: '输入您的项目名称:',
-        initial: defaultProjectName,
-        onState: (state) =>
-          (targetDir = String(state.value).trim() || defaultProjectName),
-      },
-      {
-        name: 'needsAppointmentRouter',
-        type: 'toggle',
-        message: '是否开启约定式路由？',
-        initial: true,
-        active: 'Yes',
-        inactive: 'No',
-      },
-      {
-        name: 'needsTypeScript',
-        type: 'toggle',
-        message: '是否启用typescript',
-        initial: false,
-        active: 'Yes',
-        inactive: 'No',
-      },
-      {
-        name: 'needsKsUi',
-        type: 'toggle',
-        message: '是否需要KsUi',
-        initial: false,
-        active: 'Yes',
-        inactive: 'No',
-      },
-      {
-        name: 'needsKsUtils',
-        type: 'toggle',
-        message: '是否需要KsUtils',
-        initial: false,
-        active: 'Yes',
-        inactive: 'No',
-      },
-    ])
+        onCancel: () => {
+          throw new Error(red('✖') + ' 您取消了创建cli')
+        },
+      }
+    )
   } catch (e) {
     console.log(e.message)
     process.exit(1)
@@ -76,6 +87,7 @@ async function init() {
 
   const {
     projectName,
+    projectType = 'vue',
     needsAppointmentRouter = argv.typescript,
     needsTypeScript = argv.typescript,
     // needsKsUi,
@@ -98,7 +110,7 @@ async function init() {
     JSON.stringify(pkg, null, 2)
   )
 
-  const templateRoot = path.resolve(__dirname, './template/vue/')
+  const templateRoot = path.resolve(__dirname, `./template/${projectType}/`)
   // 组合生成cli模版
   function generate(templateName: string) {
     const templateDir = path.resolve(templateRoot, templateName)
