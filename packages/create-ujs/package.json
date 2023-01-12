@@ -23,6 +23,7 @@
     "@rollup/plugin-babel": "^6.0.3",
     "@rollup/plugin-commonjs": "^24.0.0",
     "@rollup/plugin-typescript": "^8.5.0",
+    "kolorist": "^1.6.0",
     "minimist": "^1.2.7",
     "prompts": "^2.4.2",
     "rollup-plugin-copy": "^3.4.0"

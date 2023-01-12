@@ -4,6 +4,7 @@ import * as path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import minimist from 'minimist'
 import prompts from 'prompts'
+import { green, bold } from 'kolorist'
 
 import { emptyDir } from './utils'
 import { generateTemplate } from './generate'
@@ -68,7 +69,6 @@ async function init() {
         inactive: 'No',
       },
     ])
-    console.log('result', result)
   } catch (e) {
     console.log(e.message)
     process.exit(1)
@@ -90,7 +90,7 @@ async function init() {
     fs.mkdirSync(projectRootPath)
   }
 
-  console.log(`\n 正在创建脚手架到： ${projectRootPath}`)
+  console.log(`\n 正在创建脚手架到： ${bold(green(`${projectRootPath}`))}`)
 
   const pkg = { name: projectName, version: '0.0.0' }
   fs.writeFileSync(
@@ -99,7 +99,7 @@ async function init() {
   )
 
   const templateRoot = path.resolve(__dirname, './template/vue/')
-
+  // 组合生成cli模版
   function generate(templateName: string) {
     const templateDir = path.resolve(templateRoot, templateName)
     generateTemplate(templateDir, projectRootPath)
@@ -116,6 +116,22 @@ async function init() {
       generate('tsconfig/config/router')
     }
   }
+
+  const userAgent = process.env.npm_config_user_agent ?? ''
+  const packageManager = /pnpm/.test(userAgent)
+    ? 'pnpm'
+    : /yarn/.test(userAgent)
+    ? 'yarn'
+    : 'npm'
+
+  console.log(`\n创建成功！执行:\n`)
+  if (projectRootPath !== cwd) {
+    console.log(`  ${bold(green(`cd ${path.relative(cwd, projectRootPath)}`))}`)
+  }
+  console.log(`  ${bold(green(`${packageManager} install`))}`)
+  console.log(`  ${bold(green(`${packageManager} dev`))}`)
+
+  console.log()
 }
 
 init().catch((e) => {
