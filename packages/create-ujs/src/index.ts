@@ -88,12 +88,11 @@ async function init() {
   const {
     projectName,
     projectType = 'vue',
-    needsAppointmentRouter = argv.typescript,
+    needsAppointmentRouter,
     needsTypeScript = argv.typescript,
     // needsKsUi,
     // needsKsUtils,
   } = result
-
   const projectRootPath = path.join(cwd, targetDir)
 
   if (fs.existsSync(projectRootPath)) {
@@ -130,13 +129,14 @@ async function init() {
   }
 
   const userAgent = process.env.npm_config_user_agent ?? ''
+  console.log('11', process.env.npm_config_user_agent)
   const packageManager = /pnpm/.test(userAgent)
     ? 'pnpm'
     : /yarn/.test(userAgent)
     ? 'yarn'
     : 'npm'
 
-  console.log(`\n创建成功！执行:\n`)
+  console.log(`\n 创建成功！执行:\n`)
   if (projectRootPath !== cwd) {
     console.log(`  ${bold(green(`cd ${path.relative(cwd, projectRootPath)}`))}`)
   }
