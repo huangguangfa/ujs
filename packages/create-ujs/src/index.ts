@@ -129,7 +129,6 @@ async function init() {
   }
 
   const userAgent = process.env.npm_config_user_agent ?? ''
-  console.log('11', process.env.npm_config_user_agent)
   const packageManager = /pnpm/.test(userAgent)
     ? 'pnpm'
     : /yarn/.test(userAgent)
@@ -143,7 +142,7 @@ async function init() {
   console.log(`  ${bold(green(`${packageManager} install`))}`)
   console.log(`  ${bold(green(`${packageManager} dev`))}`)
 
-  console.log()
+  console.log(22111)
 }
 
 init().catch((e) => {

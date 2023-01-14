@@ -50,7 +50,7 @@ function createNodePlugins(
     copy({
       targets: [
         {
-          src: './src/template',
+          src: 'src/template',
           dest: 'dist',
         },
       ],

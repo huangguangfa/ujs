@@ -10,7 +10,6 @@ export function deepMerge(target, obj) {
   for (const key of Object.keys(obj)) {
     const oldVal = target[key]
     const newVal = obj[key]
-
     if (Array.isArray(oldVal) && Array.isArray(newVal)) {
       target[key] = mergeArrayWithDedupe(oldVal, newVal)
     } else if (isObject(oldVal) && isObject(newVal)) {

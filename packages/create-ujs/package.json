@@ -6,8 +6,9 @@
     "dev": "rimraf dist && pnpm run build-bundle -w",
     "build-bundle": "rollup --config rollup.config.ts --configPlugin typescript"
   },
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
+  "bin": {
+    "create-ujs": "dist/index.js"
+  },
   "types": "./dist/index.d.ts",
   "type": "module",
   "keywords": [],
