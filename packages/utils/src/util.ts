@@ -1,4 +1,4 @@
-const isObject = (val) => val && typeof val === 'object'
+import { isObject } from './index'
 const mergeArrayWithDedupe = (a, b) => Array.from(new Set([...a, ...b]))
 
 /**

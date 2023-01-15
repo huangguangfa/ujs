@@ -1,7 +1,6 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'rollup'
-import json from '@rollup/plugin-json'
 import typescript from '@rollup/plugin-typescript'
 import commonjs from '@rollup/plugin-commonjs'
 import nodeResolve from '@rollup/plugin-node-resolve'
@@ -16,15 +15,18 @@ const sharedNodeOptions = defineConfig({
     propertyReadSideEffects: false,
     tryCatchDeoptimization: false,
   },
-  output: {
-    dir: path.resolve(__dirname, 'dist'),
-    entryFileNames: `[name].js`,
-    chunkFileNames: 'chunks/dep-[hash].js',
-    exports: 'named',
-    format: 'esm',
-    externalLiveBindings: false,
-    freeze: false,
-  },
+  output: [
+    {
+      dir: path.resolve(__dirname, 'dist'),
+      entryFileNames: `[name].es.js`,
+      chunkFileNames: 'chunks/dep-[hash].js',
+      exports: 'named',
+      format: 'esm',
+      externalLiveBindings: false,
+      freeze: false,
+      sourcemap: true,
+    },
+  ],
 })
 
 function createNodeConfig(isProduction: boolean) {
@@ -32,13 +34,8 @@ function createNodeConfig(isProduction: boolean) {
     ...sharedNodeOptions,
     input: {
       index: path.resolve(__dirname, 'src/index.ts'),
-      cli: path.resolve(__dirname, 'src/cli/cli.ts'),
     },
-    output: {
-      ...sharedNodeOptions.output,
-      sourcemap: !isProduction,
-    },
-    external: ['esbuild', 'rollup', 'vite', 'express', 'chalk'],
+    external: ['rollup'],
     plugins: createNodePlugins(isProduction, !isProduction),
   })
 }
@@ -58,7 +55,6 @@ function createNodePlugins(
       filterRoot: './src',
     }),
     nodeResolve({ preferBuiltins: true }),
-    json(),
     commonjs(),
   ]
 }
