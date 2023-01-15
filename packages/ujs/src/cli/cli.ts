@@ -17,7 +17,8 @@ cli
   .action(async () => {
     console.log(devGradientBanner)
     const { createServer } = await import('../server')
-    await createServer()
+    const server = await createServer()
+    await server.listen()
   })
 
 // build

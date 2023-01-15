@@ -38,7 +38,7 @@ function createNodeConfig(isProduction: boolean) {
       ...sharedNodeOptions.output,
       sourcemap: !isProduction,
     },
-    external: ['esbuild', 'rollup'],
+    external: ['esbuild', 'rollup', 'vite', 'express', 'chalk'],
     plugins: createNodePlugins(isProduction, !isProduction),
   })
 }

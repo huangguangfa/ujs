@@ -1,13 +1,15 @@
 import type { UserConfig, ViteUserConfig } from '../config'
-export interface HttppServerOptions {
-  prot?: number
+export interface HttpOptions {
+  viteConfig: ViteUserConfig
 }
 
 export async function resolveHtppOptions(
   config: UserConfig
-): Promise<ViteUserConfig | undefined> {
+): Promise<HttpOptions | undefined> {
   if (!config) return undefined
   return {
-    ...config.viteConfig,
+    viteConfig: {
+      ...config.viteConfig,
+    },
   }
 }

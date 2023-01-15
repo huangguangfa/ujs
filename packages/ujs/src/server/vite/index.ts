@@ -1,9 +1,30 @@
 import { createServer } from 'vite'
 
-export async function createViteServer() {
-  const viteConfig = resolveViteConfig()
+import type { ViteUserConfig } from '../../config'
+import type { HttpOptions } from '../htpp-option'
 
-  console.log(viteConfig, createServer)
+export async function createViteServer(httpConfig: HttpOptions | undefined) {
+  const viteConfig = resolveViteConfig(httpConfig)
+  const viteConfigServer = { ...viteConfig.server };
+  
+  return createServer({
+    ...viteConfig,
+    server: {
+      ...viteConfigServer,
+      middlewareMode: true,
+    },
+  })
 }
 
-function resolveViteConfig() {}
+function resolveViteConfig(
+  httpConfig: HttpOptions | undefined
+): ViteUserConfig {
+  if (!httpConfig) return {}
+  
+  return {
+    ...httpConfig.viteConfig,
+    plugins: [
+        
+    ]
+  }
+}
