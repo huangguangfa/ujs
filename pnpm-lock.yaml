@@ -40,12 +40,6 @@ importers:
     dependencies:
       ujs: link:../../packages/ujs
 
-  examples/test:
-    specifiers:
-      ujs: workspace:*
-    dependencies:
-      ujs: link:../../packages/ujs
-
   examples/ujs-vue:
     specifiers:
       ujs: workspace:^1.0.0
@@ -65,6 +59,7 @@ importers:
       '@rollup/plugin-babel': ^6.0.3
       '@rollup/plugin-commonjs': ^24.0.0
       '@rollup/plugin-typescript': ^8.5.0
+      '@ujs/utils': '*'
       kolorist: ^1.6.0
       minimist: ^1.2.7
       prompts: ^2.4.2
@@ -76,6 +71,7 @@ importers:
       '@rollup/plugin-babel': 6.0.3_rollup@3.9.1
       '@rollup/plugin-commonjs': 24.0.0_rollup@3.9.1
       '@rollup/plugin-typescript': 8.5.0_rollup@3.9.1
+      '@ujs/utils': link:../utils
       kolorist: 1.6.0
       minimist: 1.2.7
       prompts: 2.4.2
@@ -159,7 +155,19 @@ importers:
       cac: 6.7.14
 
   packages/utils:
-    specifiers: {}
+    specifiers:
+      '@rollup/plugin-babel': ^6.0.3
+      '@rollup/plugin-commonjs': ^24.0.0
+      '@rollup/plugin-node-resolve': ^15.0.1
+      '@rollup/plugin-typescript': ^8.5.0
+      rollup: ^3.9.1
+    dependencies:
+      rollup: 3.9.1
+    devDependencies:
+      '@rollup/plugin-babel': 6.0.3_rollup@3.9.1
+      '@rollup/plugin-commonjs': 24.0.0_rollup@3.9.1
+      '@rollup/plugin-node-resolve': 15.0.1_rollup@3.9.1
+      '@rollup/plugin-typescript': 8.5.0_rollup@3.9.1
 
 packages:
 

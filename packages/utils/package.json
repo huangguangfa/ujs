@@ -1,12 +1,25 @@
 {
   "name": "@ujs/utils",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "ujs工具库",
+  "type": "module",
+  "main": "./dist/index.es.js",
+  "module": "./dist/index.es.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "rimraf dist && pnpm run build-bundle -w",
+    "build-bundle": "rollup --config rollup.config.ts --configPlugin typescript"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "rollup": "^3.9.1"
+  },
+  "devDependencies": {
+    "@rollup/plugin-babel": "^6.0.3",
+    "@rollup/plugin-commonjs": "^24.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@rollup/plugin-typescript": "^8.5.0"
+  }
 }

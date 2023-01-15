@@ -1,6 +1,6 @@
 import * as fs from 'node:fs'
 import * as path from 'node:path'
-import { deepMerge } from './deepMerge'
+import { deepMerge } from '@ujs/utils'
 import { sortDependencies } from './sortDependencies'
 
 /**

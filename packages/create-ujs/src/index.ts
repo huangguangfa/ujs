@@ -5,8 +5,8 @@ import { fileURLToPath } from 'node:url'
 import minimist from 'minimist'
 import prompts from 'prompts'
 import { green, bold, red } from 'kolorist'
+import { emptyDir } from '@ujs/utils'
 
-import { emptyDir } from './utils'
 import { generateTemplate } from './generate'
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url))
@@ -141,8 +141,6 @@ async function init() {
   }
   console.log(`  ${bold(green(`${packageManager} install`))}`)
   console.log(`  ${bold(green(`${packageManager} dev`))}`)
-
-  console.log(22111)
 }
 
 init().catch((e) => {
