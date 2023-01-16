@@ -32,7 +32,7 @@ export async function createServer(inlineConfig: InlineConfig = {}) {
   // create server
   const app = express()
   const httpsOptions = await resolveHtppOptions(config)
-  const viteServer = await createViteServer(httpsOptions)
+  const viteServer = await createViteServer(httpsOptions, config)
 
   // use vite via middleware way
   app.use(viteServer.middlewares)

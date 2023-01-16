@@ -1,6 +1,10 @@
-import type { ViteUserConfig, VitePlugin } from '../../config'
+import { getUjsVitePlugins } from './plugins/index'
+import type { ViteUserConfig, VitePlugin, ResolvedConfig } from '../../config'
 export async function resolveVitePlugins(
-  viteConfig: ViteUserConfig
+  viteConfig: ViteUserConfig,
+  config: ResolvedConfig
 ): Promise<Array<VitePlugin>> {
-  return [...(viteConfig.plugins || [])].filter(Boolean)
+  return [...(viteConfig.plugins || []), ...getUjsVitePlugins(config)].filter(
+    Boolean
+  )
 }

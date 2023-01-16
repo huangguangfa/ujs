@@ -5,13 +5,13 @@ import { pathToFileURL } from 'node:url'
 import colors from 'picocolors'
 import { DEFAULT_CONFIG_FILES } from '../common/constants'
 import { lookupFile, dynamicImport } from '../utils'
-import type { UserConfig as viteConfig, PluginOption } from 'vite'
+import type { UserConfig as viteConfig, PluginOption, Plugin } from 'vite'
 
 import { build } from 'esbuild'
 const _require = createRequire(import.meta.url)
 
 export type ViteUserConfig = viteConfig
-export type VitePlugin = PluginOption
+export type VitePlugin = PluginOption | Plugin
 
 export interface UserConfigServer {
   prot?: number
@@ -22,7 +22,8 @@ export interface UserConfigServer {
 export interface UserConfig {
   base?: string
   publicPath?: string
-  headScripts?: Array<String>
+  headScripts?: Array<string>
+  scripts?: Array<string>
   viteConfig?: viteConfig
   mode?: string
   root?: string

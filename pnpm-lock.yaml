@@ -139,6 +139,7 @@ importers:
       '@rollup/plugin-json': ^6.0.0
       '@rollup/plugin-node-resolve': ^15.0.1
       '@rollup/plugin-typescript': ^8.5.0
+      '@ujs/utils': workspace:*
       cac: ^6.7.14
       chalk: ^5.2.0
       esbuild: ^0.16.15
@@ -158,6 +159,7 @@ importers:
       '@rollup/plugin-json': 6.0.0_rollup@3.9.1
       '@rollup/plugin-node-resolve': 15.0.1_rollup@3.9.1
       '@rollup/plugin-typescript': 8.5.0_rollup@3.9.1
+      '@ujs/utils': link:../utils
       cac: 6.7.14
       chalk: 5.2.0
       express: 4.18.2

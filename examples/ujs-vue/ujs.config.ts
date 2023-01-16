@@ -1,7 +1,8 @@
 export default {
   base: '/foo',
   publicPath: '',
-  headScripts: ['console.log(111)'],
+  headScripts: ['alert("headScripts")'],
+  scripts: ['console.log("body-scripts")'],
   router: [
     {
       path: 'user',
