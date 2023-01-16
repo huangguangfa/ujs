@@ -6,7 +6,12 @@ interface LookupFileOptions {
   rootDir?: string
   predicate?: (file: string) => boolean
 }
-
+/**
+ * 查找某个文件
+ * @param  dir 查找的目录
+ * @param  formats 查找文件的昵称，可以多个
+ * @param options 条件、支持外部callback check
+ */
 export function lookupFile(
   dir: string,
   formats: string[],
