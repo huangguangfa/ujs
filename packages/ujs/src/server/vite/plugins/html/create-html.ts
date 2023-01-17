@@ -9,7 +9,7 @@ export function createHtml(config: ResolvedConfig) {
     createScriptTag(config.headScripts).join('\n'),
     `</head>
     <body>`,
-    createScriptTag(config.scripts).join('\n'),
+    createScriptTag(config.bodyScripts).join('\n'),
     `</body>
     </html>`,
   ]

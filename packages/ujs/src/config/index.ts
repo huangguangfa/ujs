@@ -23,7 +23,7 @@ export interface UserConfig {
   base?: string
   publicPath?: string
   headScripts?: Array<string>
-  scripts?: Array<string>
+  bodyScripts?: Array<string>
   viteConfig?: viteConfig
   mode?: string
   root?: string

@@ -40,6 +40,12 @@ importers:
     dependencies:
       ujs: link:../../packages/ujs
 
+  examples/test:
+    specifiers:
+      ujs: workspace:*
+    dependencies:
+      ujs: link:../../packages/ujs
+
   examples/ujs-vue:
     specifiers:
       chalk: ^5.2.0

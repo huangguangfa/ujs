@@ -115,7 +115,6 @@ async function init() {
     const templateDir = path.resolve(templateRoot, templateName)
     generateTemplate(templateDir, projectRootPath)
   }
-
   generate('base')
   if (needsAppointmentRouter && !needsTypeScript) {
     generate('config/router')
