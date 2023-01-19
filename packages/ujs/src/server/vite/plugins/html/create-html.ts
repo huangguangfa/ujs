@@ -1,6 +1,8 @@
 import { isArray } from '@ujs/utils'
 import type { ResolvedConfig } from '../../../../config'
 
+const _bodyScripts = ['<script src=".ujs/index.ts"></script>']
+
 export function createHtml(config: ResolvedConfig) {
   const htmlContent = [
     `<!DOCTYPE html>
@@ -9,6 +11,7 @@ export function createHtml(config: ResolvedConfig) {
     createScriptTag(config.headScripts).join('\n'),
     `</head>
     <body>`,
+    createScriptTag(_bodyScripts).join('\n'),
     createScriptTag(config.bodyScripts).join('\n'),
     `</body>
     </html>`,
@@ -24,7 +27,7 @@ function createScriptTag(scriptContent: Array<string> | undefined) {
     const scriptTagStart = '<script>'
     const scriptTagEnd = '</script>'
     return scriptContent.map((i) => {
-      if (i.includes(scriptTagStart)) return i
+      if (i.includes(scriptTagEnd)) return i
       return `${scriptTagStart}${i}${scriptTagEnd}`
     })
   }

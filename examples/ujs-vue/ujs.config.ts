@@ -1,7 +1,7 @@
 export default {
   base: '/',
   publicPath: '',
-  headScripts: ['alert("headScripts")'],
+  headScripts: [],
   bodyScripts: [
     'console.log("body-scripts")',
     '<script>console.log("add body <script>")</script>',
