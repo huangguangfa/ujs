@@ -155,6 +155,7 @@ importers:
       '@rollup/plugin-node-resolve': ^15.0.1
       '@rollup/plugin-typescript': ^8.5.0
       '@ujs/utils': workspace:*
+      '@vitejs/plugin-vue': ^4.0.0
       cac: ^6.7.14
       chalk: ^5.2.0
       esbuild: ^0.16.15
@@ -175,6 +176,7 @@ importers:
       '@rollup/plugin-node-resolve': 15.0.1_rollup@3.9.1
       '@rollup/plugin-typescript': 8.5.0_rollup@3.9.1
       '@ujs/utils': link:../utils
+      '@vitejs/plugin-vue': 4.0.0_vite@4.0.4
       cac: 6.7.14
       chalk: 5.2.0
       express: 4.18.2
@@ -1288,6 +1290,16 @@ packages:
     dependencies:
       '@typescript-eslint/types': 5.48.0
       eslint-visitor-keys: 3.3.0
+    dev: true
+
+  /@vitejs/plugin-vue/4.0.0_vite@4.0.4:
+    resolution: {integrity: sha512-e0X4jErIxAB5oLtDqbHvHpJe/uWNkdpYV83AOG2xo2tEVSzCzewgJMtREZM30wXnM5ls90hxiOtAuVU6H5JgbA==}
+    engines: {node: ^14.18.0 || >=16.0.0}
+    peerDependencies:
+      vite: ^4.0.0
+      vue: ^3.2.25
+    dependencies:
+      vite: 4.0.4
     dev: true
 
   /@vue/compiler-core/3.2.45:

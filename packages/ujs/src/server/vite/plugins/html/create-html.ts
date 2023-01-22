@@ -1,7 +1,7 @@
 import { isArray } from '@ujs/utils'
 import type { ResolvedConfig } from '../../../../config'
 
-const _bodyScripts = ['<script src=".ujs/ujs.ts"></script>']
+const _bodyScripts = ['<script src=".ujs/index.ts" type="module"></script>']
 
 export function createHtml(config: ResolvedConfig) {
   const htmlContent = [
@@ -10,7 +10,8 @@ export function createHtml(config: ResolvedConfig) {
     <head>`,
     createScriptTag(config.headScripts).join('\n'),
     `</head>
-    <body>`,
+    <body>
+    <div id="app"></div>`,
     createScriptTag(config.bodyScripts).join('\n'),
     createScriptTag(_bodyScripts).join('\n'),
     `</body>
