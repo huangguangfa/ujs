@@ -1,1 +1,1 @@
-export { renderClient } from "./render";
+export { renderClient } from './render'

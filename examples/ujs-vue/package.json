@@ -12,8 +12,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@ujs/renderer-vue": "workspace:*",
     "chalk": "^5.2.0",
-    "ujs": "workspace:^1.0.0"
+    "ujs": "workspace:*"
   },
-  "dependencies": {}
+  "dependencies": {
+    "vue": "^3.2.45"
+  }
 }

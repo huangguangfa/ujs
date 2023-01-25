@@ -8,7 +8,8 @@ import { mainFile, appVue } from './config'
 export default function createRunTimeMain() {
   return {
     name: 'vite-plugin-ujs-runtime-main',
-    config() {
+    config(configs) {
+      debugger
       const rootPath = resolve(process.cwd(), '.ujs')
       if (fs.existsSync(rootPath)) {
         emptyDir(rootPath)

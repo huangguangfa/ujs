@@ -8,7 +8,7 @@ export function createMainContent() {
 function renderVueTempate() {
   return `
 import app from './app.vue'
-import { renderClient } from '/Users/guangfa/Desktop/guangfaMac/guangfa/gfCode/ujs/packages/renderer-vue'
+import { renderClient } from '@ujs/renderer-vue'
 renderClient({app})
 console.log(333)
     `
@@ -16,6 +16,7 @@ console.log(333)
 
 export function createAppVueContent() {
   return `<template>
+  111
   <router-view></router-view>
 </template>
   `

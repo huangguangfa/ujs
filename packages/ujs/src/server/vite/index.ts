@@ -25,9 +25,13 @@ async function resolveViteConfig(
   config: ResolvedConfig
 ): Promise<ViteUserConfig> {
   if (!httpConfig) return {}
-
-  return {
+  const defaultConfig = {
+    __VUE_OPTIONS_API__: false,
     ...httpConfig.viteConfig,
+  }
+  return {
+    ...defaultConfig,
+    router: config.router,
     plugins: [...(await resolveVitePlugins(httpConfig.viteConfig, config))],
   }
 }
