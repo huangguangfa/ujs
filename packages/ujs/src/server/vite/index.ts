@@ -31,7 +31,7 @@ async function resolveViteConfig(
   }
   return {
     ...defaultConfig,
-    router: config.router,
+    routes: config.routes,
     plugins: [...(await resolveVitePlugins(httpConfig.viteConfig, config))],
   }
 }

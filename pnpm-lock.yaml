@@ -161,6 +161,7 @@ importers:
       chalk: ^5.2.0
       esbuild: ^0.16.15
       express: ^4.18.2
+      resolve: ^1.22.1
       rollup: ^3.9.1
       strip-ansi: ^7.0.1
       vite: ^4.0.4
@@ -182,6 +183,7 @@ importers:
       cac: 6.7.14
       chalk: 5.2.0
       express: 4.18.2
+      resolve: 1.22.1
       strip-ansi: 7.0.1
 
   packages/utils:

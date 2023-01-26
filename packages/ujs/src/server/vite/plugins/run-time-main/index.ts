@@ -4,12 +4,12 @@ import { emptyDir } from '@ujs/utils'
 
 import { createMainContent, createAppVueContent } from './main'
 import { mainFile, appVue } from './config'
+import { getRoutes } from './router'
 
 export default function createRunTimeMain() {
   return {
     name: 'vite-plugin-ujs-runtime-main',
-    config(configs) {
-      debugger
+    async config(config) {
       const rootPath = resolve(process.cwd(), '.ujs')
       if (fs.existsSync(rootPath)) {
         emptyDir(rootPath)
@@ -34,6 +34,11 @@ export default function createRunTimeMain() {
           console.log(`.ujs入口文件写入失败${err.message}`)
         }
       })
+
+      const routes = await getRoutes(config)
+      console.log('--', routes)
+
+      // 写入router文件
     },
   }
 }

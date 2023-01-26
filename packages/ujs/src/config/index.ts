@@ -10,7 +10,7 @@ import type { UserConfig as viteConfig, PluginOption, Plugin } from 'vite'
 import { build } from 'esbuild'
 const _require = createRequire(import.meta.url)
 
-export type ViteUserConfig = viteConfig & { router?: any }
+export type ViteUserConfig = viteConfig & { routes?: any }
 export type VitePlugin = PluginOption | Plugin
 
 export interface UserConfigServer {
@@ -30,13 +30,17 @@ export interface UserConfig {
   server?: UserConfigServer
 }
 
-export interface ConfigRouter {}
+export interface ConfigRouter {
+  path: string
+  component: string
+  wrappers?: any
+}
 
 export type ResolvedConfig = Readonly<
   Omit<UserConfig, 'plugins'> & {
     env?: string
     configFile: string | undefined | false
-    router?: Array<ConfigRouter>
+    routes?: Array<ConfigRouter>
   }
 >
 
