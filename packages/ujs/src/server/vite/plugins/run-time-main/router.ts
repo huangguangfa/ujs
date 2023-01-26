@@ -167,3 +167,24 @@ function ensureWithSlash(left: string, right: string) {
   }
   return `${left.replace(/\/+$/, '')}/${right.replace(/^\/+/, '')}`
 }
+
+export async function getRouteComponents(opts: {
+  routes: Record<string, any>
+  prefix: string
+}) {
+  const imports = Object.keys(opts.routes)
+    .map((key) => {
+      const route = opts.routes[key]
+      if (route.file.startsWith('(')) {
+        return `'${key}': () => Promise.resolve(${route.file}),`
+      }
+
+      const path =
+        isAbsolute(route.file) || route.file.startsWith('@/')
+          ? route.file
+          : `${opts.prefix}${route.file}`
+      return `'${key}': () => import('${winPath(path)}'),`
+    })
+    .join('\n')
+  return `{\n${imports}\n}`
+}

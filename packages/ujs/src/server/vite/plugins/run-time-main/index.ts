@@ -3,8 +3,8 @@ import { resolve } from 'node:path'
 import { emptyDir } from '@ujs/utils'
 
 import { createMainContent, createAppVueContent } from './main'
-import { mainFile, appVue } from './config'
-import { getRoutes } from './router'
+import { mainFile, appVue, routerFile } from './config'
+import { getRoutes, getRouteComponents } from './router'
 
 export default function createRunTimeMain() {
   return {
@@ -34,11 +34,30 @@ export default function createRunTimeMain() {
           console.log(`.ujs入口文件写入失败${err.message}`)
         }
       })
-
-      const routes = await getRoutes(config)
-      console.log('--', routes)
-
       // 写入router文件
+      const routes = await getRoutes(config)
+      const routeComponents = await getRouteComponents({
+        routes,
+        prefix: '',
+      })
+      const routerContent = `
+      export async function getRoutes() {
+        return {
+          routes:${JSON.stringify(routes)},
+          routeComponents:${routeComponents}
+        }
+      }
+      `
+      fs.writeFile(
+        resolve(rootPath, routerFile),
+        routerContent,
+        'utf8',
+        (err) => {
+          if (err) {
+            console.log(`router.ts写入失败${err.message}`)
+          }
+        }
+      )
     },
   }
 }

@@ -1,6 +1,5 @@
 export function createMainContent() {
   const renderVueStr = renderVueTempate()
-
   return `${renderVueStr}
     `
 }
