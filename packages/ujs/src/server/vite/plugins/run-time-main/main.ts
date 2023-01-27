@@ -6,16 +6,24 @@ export function createMainContent() {
 
 function renderVueTempate() {
   return `
-import app from './app.vue'
-import { renderClient } from '@ujs/renderer-vue'
-renderClient({app})
-console.log(333)
+  import app from './app.vue'
+  import { getRoutes } from './router'
+  import { renderClient } from '@ujs/renderer-vue'
+  
+  async function render() {
+    const { routes, routeComponents } = await getRoutes()
+    renderClient({
+      app,
+      routes,
+      routeComponents,
+    })
+  }
+  render()
     `
 }
 
 export function createAppVueContent() {
   return `<template>
-  111
   <router-view></router-view>
 </template>
   `

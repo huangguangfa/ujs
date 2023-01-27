@@ -3,7 +3,8 @@
 // @ts-ignore
 import { createApp } from 'vue'
 // @ts-ignore
-import { createRouter, RouterHistory } from 'vue-router'
+import { createRouter, RouterHistory, createWebHashHistory } from 'vue-router'
+
 import { createClientRoutes } from './routes'
 import { IRouteComponents, IRoutesById } from './types'
 
@@ -21,10 +22,9 @@ export function renderClient(opts: {
     routeComponents: opts.routeComponents,
   }) as any
   // @ts-ignore
-  let rootContainer = opts.App
-
+  let rootContainer = opts.app
   const router = createRouter({
-    history: !!opts.history,
+    history: opts.history || createWebHashHistory(),
     strict: true,
     routes,
   })

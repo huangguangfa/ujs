@@ -41,7 +41,7 @@ export async function getRoutes(
             extensions: ['.vue'],
           })
         )
-        component = component.replace(winPath(`${''}/`), '@/')
+        component = component.replace(winPath(`${''}/`), '/')
         return component
       },
     })

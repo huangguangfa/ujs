@@ -8,6 +8,10 @@ export default {
   ],
   routes: [
     {
+      path: '/',
+      component: '@/app',
+    },
+    {
       path: 'user',
       component: '@/user/index',
     },
