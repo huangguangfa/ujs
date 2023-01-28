@@ -1,3 +1,3 @@
 <template>
-  <div class="user">用户列表页面</div>
+  <div class="user">用户页面</div>
 </template>

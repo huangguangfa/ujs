@@ -10,14 +10,20 @@ export default {
     {
       path: '/',
       component: '@/app',
+      routes: [
+        {
+          path: 'user',
+          component: '@/user/index',
+        },
+        {
+          path: 'list',
+          component: '@/user/list',
+        },
+      ],
     },
     {
-      path: 'user',
-      component: '@/user/index',
-    },
-    {
-      path: 'list',
-      component: '@/user/list',
+      path: '/system',
+      component: '@/system/index',
     },
   ],
 }

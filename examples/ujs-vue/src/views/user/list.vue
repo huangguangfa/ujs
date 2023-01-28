@@ -1,3 +1,3 @@
 <template>
-  <div>list</div>
+  <div>用户列表</div>
 </template>
