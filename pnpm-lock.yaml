@@ -51,11 +51,6 @@ importers:
       '@ujs/renderer-vue': workspace:*
       chalk: ^5.2.0
       ujs: workspace:*
-      vue: ^3.2.45
-      vue-router: ^4.1.6
-    dependencies:
-      vue: 3.2.45
-      vue-router: 4.1.6_vue@3.2.45
     devDependencies:
       '@ujs/renderer-vue': link:../../packages/renderer-vue
       chalk: 5.2.0
