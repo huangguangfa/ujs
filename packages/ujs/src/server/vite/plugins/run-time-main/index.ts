@@ -6,41 +6,60 @@ import { createMainContent, createAppVueContent } from './main'
 import { mainFile, appVue, routerFile } from './config'
 import { getRoutes, getRouteComponents } from './router'
 
+import type { ResolvedConfig } from '../../../../config/index'
+
 export default function createRunTimeMain() {
   return {
     name: 'vite-plugin-ujs-runtime-main',
-    async config(config) {
+    async config(config: ResolvedConfig) {
       const rootPath = resolve(process.cwd(), '.ujs')
       if (fs.existsSync(rootPath)) {
         emptyDir(rootPath)
       } else if (!fs.existsSync(rootPath)) {
         fs.mkdirSync(rootPath)
       }
-      const content = createMainContent()
-      // 写入app.vue
-      fs.writeFile(
-        resolve(rootPath, appVue),
-        createAppVueContent(),
-        'utf8',
-        (err) => {
-          if (err) {
-            console.log(`app.vue文件写入失败${err.message}`)
-          }
-        }
-      )
-      // 写入入口文件
-      fs.writeFile(resolve(rootPath, mainFile), content, 'utf8', (err) => {
-        if (err) {
-          console.log(`.ujs入口文件写入失败${err.message}`)
-        }
-      })
+      // app.vue文件写入
+      generateAppVueFile()
+      // 入口文件写入
+      generateMainFile()
       // 写入router文件
-      const routes = await getRoutes(config)
-      const routeComponents = await getRouteComponents({
-        routes,
-        prefix: '',
-      })
-      const routerContent = `
+      generateRouteFile(config)
+    },
+  }
+}
+
+function generateAppVueFile() {
+  const rootPath = resolve(process.cwd(), '.ujs')
+  const appVueContent = createAppVueContent()
+  generateFile({
+    path: rootPath,
+    fileName: appVue,
+    content: appVueContent,
+  }).catch((e) => {
+    console.log('Failed to write entry file', e)
+  })
+}
+
+function generateMainFile() {
+  const rootPath = resolve(process.cwd(), '.ujs')
+  const content = createMainContent()
+  generateFile({
+    path: rootPath,
+    fileName: mainFile,
+    content: content,
+  }).catch((e) => {
+    console.log('Failed to write entry file', e)
+  })
+}
+
+async function generateRouteFile(config: ResolvedConfig) {
+  const rootPath = resolve(process.cwd(), '.ujs')
+  const routes = await getRoutes(config)
+  const routeComponents = await getRouteComponents({
+    routes,
+    prefix: '',
+  })
+  const routerContent = `
       export async function getRoutes() {
         return {
           routes:${JSON.stringify(routes)},
@@ -48,16 +67,24 @@ export default function createRunTimeMain() {
         }
       }
       `
-      fs.writeFile(
-        resolve(rootPath, routerFile),
-        routerContent,
-        'utf8',
-        (err) => {
-          if (err) {
-            console.log(`router.ts写入失败${err.message}`)
-          }
-        }
-      )
-    },
-  }
+  generateFile({
+    path: rootPath,
+    fileName: routerFile,
+    content: routerContent,
+  }).catch((e) => {
+    console.log('Failed to write router file', e)
+  })
+}
+
+function generateFile(opt: {
+  path: string
+  fileName: string
+  content: string
+}) {
+  return new Promise((_resolve, _reject) => {
+    const { path, fileName, content } = opt
+    fs.writeFile(resolve(path, fileName), content, 'utf8', (err) => {
+      ;(err && _reject(err)) || _resolve(true)
+    })
+  })
 }

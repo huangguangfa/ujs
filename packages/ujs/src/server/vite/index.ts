@@ -3,7 +3,7 @@ import { resolveVitePlugins } from './plugins'
 import { resolveAliasConfig } from './alias'
 
 import type { ViteUserConfig, ResolvedConfig } from '../../config'
-import type { HttpOptions } from '../htpp-option'
+import type { HttpOptions } from '../http-option'
 
 export async function createViteServer(
   httpConfig: HttpOptions | undefined,
