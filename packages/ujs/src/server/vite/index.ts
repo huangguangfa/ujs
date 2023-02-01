@@ -1,5 +1,6 @@
 import { createServer } from 'vite'
 import { resolveVitePlugins } from './plugins'
+import { resolveAliasConfig } from './alias'
 
 import type { ViteUserConfig, ResolvedConfig } from '../../config'
 import type { HttpOptions } from '../htpp-option'
@@ -13,6 +14,10 @@ export async function createViteServer(
 
   return createServer({
     ...viteConfig,
+    resolve: {
+      ...(viteConfig.resolve || {}),
+      alias: resolveAliasConfig(viteConfig.resolve?.alias),
+    },
     server: {
       ...viteConfigServer,
       middlewareMode: true,

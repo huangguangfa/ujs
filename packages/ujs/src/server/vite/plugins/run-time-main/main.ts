@@ -1,3 +1,6 @@
+import { dirname } from 'path'
+import { createRequire } from 'node:module'
+const _require = createRequire(import.meta.url)
 export function createMainContent() {
   const renderVueStr = renderVueTempate()
   return `${renderVueStr}
@@ -5,10 +8,13 @@ export function createMainContent() {
 }
 
 function renderVueTempate() {
+  const rendererVuePath = dirname(
+    _require.resolve('@ujs/renderer-vue/package.json')
+  )
   return `
   import app from './app.vue'
   import { getRoutes } from './router'
-  import { renderClient } from '@ujs/renderer-vue'
+  import { renderClient } from '${rendererVuePath}'
   
   async function render() {
     const { routes, routeComponents } = await getRoutes()

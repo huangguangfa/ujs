@@ -48,12 +48,8 @@ importers:
 
   examples/ujs-vue:
     specifiers:
-      '@ujs/renderer-vue': workspace:*
-      chalk: ^5.2.0
       ujs: workspace:*
     devDependencies:
-      '@ujs/renderer-vue': link:../../packages/renderer-vue
-      chalk: 5.2.0
       ujs: link:../../packages/ujs
 
   examples/vite-server:
@@ -157,6 +153,7 @@ importers:
       '@rollup/plugin-json': ^6.0.0
       '@rollup/plugin-node-resolve': ^15.0.1
       '@rollup/plugin-typescript': ^8.5.0
+      '@ujs/renderer-vue': workspace:*
       '@ujs/utils': workspace:*
       '@vitejs/plugin-vue': ^4.0.0
       cac: ^6.7.14
@@ -168,6 +165,7 @@ importers:
       strip-ansi: ^7.0.1
       vite: ^4.0.4
     dependencies:
+      '@ujs/renderer-vue': link:../renderer-vue
       '@vitejs/plugin-vue': 4.0.0_vite@4.0.4
       esbuild: 0.16.15
       rollup: 3.9.1
