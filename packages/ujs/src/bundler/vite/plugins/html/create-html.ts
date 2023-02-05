@@ -1,7 +1,9 @@
 import { isArray } from '@ujs/utils'
+import { resolve } from 'node:path'
+import { runTimeDirectory, mainFile } from '../generate-entry/config'
 import type { ResolvedConfig } from '../../../../config'
 
-const _bodyScripts = ['<script src="./index.ts" type="module"></script>']
+const _bodyScripts = []
 
 export function createHtml(config: ResolvedConfig) {
   const htmlContent = [
@@ -14,6 +16,7 @@ export function createHtml(config: ResolvedConfig) {
     <div id="app"></div>`,
     createScriptTag(config.bodyScripts).join('\n'),
     createScriptTag(_bodyScripts).join('\n'),
+    getMainJs(),
     `</body>
     </html>`,
   ]
@@ -33,4 +36,9 @@ function createScriptTag(scriptContent: Array<string> | undefined) {
     })
   }
   return [scriptContent]
+}
+
+function getMainJs() {
+  const mainJsPath = resolve(process.cwd(), `${runTimeDirectory}/${mainFile}`)
+  return `<script src="${mainJsPath}" type="module"></script>`
 }

@@ -21,7 +21,7 @@ export async function resolveViteConfig(
     },
     server: {
       ...defaultConfig.server,
-      middlewareMode: true, // 已中间件的形式创建服务
+      middlewareMode: true, // 以中间件的形式创建服务
     },
   }
 }
