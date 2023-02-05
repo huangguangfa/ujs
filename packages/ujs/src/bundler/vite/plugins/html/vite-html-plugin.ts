@@ -1,10 +1,11 @@
-import { createHtml } from './create-html'
 import chalk from 'chalk'
+import { readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
+import { runTimeDirectory, mainHtml } from '../generate-entry/config'
 
 import type { Plugin } from 'vite'
-import type { ResolvedConfig } from '../../../../config'
 
-export default function ViteHtmlPlugin(config: ResolvedConfig): Plugin {
+export default function ViteHtmlPlugin(): Plugin {
   return {
     name: 'vite-plugin-ujs-html',
     configureServer(server) {
@@ -21,9 +22,13 @@ export default function ViteHtmlPlugin(config: ResolvedConfig): Plugin {
           if (req.headers.accept?.includes('text/html')) {
             try {
               // 处理通用html
-              const html = await createHtml(config)
+              const htmlPath = resolve(
+                process.cwd(),
+                `${runTimeDirectory}/${mainHtml}`
+              )
+              const htmlContent = readFileSync(htmlPath, 'utf-8')
               res.setHeader('Content-Type', 'text/html')
-              res.end(await server.transformIndexHtml(req.url, html))
+              res.end(await server.transformIndexHtml(req.url, htmlContent))
             } catch (e) {
               console.log(chalk.red('html模版注入异常'))
               return next(e)

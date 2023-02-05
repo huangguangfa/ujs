@@ -1,6 +1,6 @@
 import http from 'http'
 import express from 'express'
-import { createViteServer } from './vite'
+import { createViteServer } from '../bundler/vite'
 import { resolveConfig } from '../config'
 import { resolveHostname, resolveServerUrls, getDevBanner } from './utils'
 import { defaultProt } from '../common/constants'

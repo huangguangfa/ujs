@@ -1,6 +1,4 @@
 export default {
-  base: '/',
-  publicPath: '',
   headScripts: [],
   bodyScripts: [
     'console.log("body-scripts")',

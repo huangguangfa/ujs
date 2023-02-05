@@ -3,16 +3,23 @@ import { resolve } from 'node:path'
 import { emptyDir } from '@ujs/utils'
 
 import { createMainContent, createAppVueContent } from './main'
-import { mainFile, appVue, routerFile } from './config'
+import {
+  runTimeDirectory,
+  mainFile,
+  appVue,
+  routerFile,
+  mainHtml,
+} from './config'
 import { getRoutes, getRouteComponents } from './router'
+import { createHtml } from '../html/create-html'
 
-import type { ResolvedConfig } from '../../../../config/index'
+import type { ResolvedConfig, CustomViteConfig } from '../../../../config/index'
 
 export default function createRunTimeMain() {
   return {
     name: 'vite-plugin-ujs-runtime-main',
-    async config(config: ResolvedConfig) {
-      const rootPath = resolve(process.cwd(), '.ujs')
+    async config(config: CustomViteConfig) {
+      const rootPath = resolve(process.cwd(), runTimeDirectory)
       if (fs.existsSync(rootPath)) {
         emptyDir(rootPath)
       } else if (!fs.existsSync(rootPath)) {
@@ -24,12 +31,26 @@ export default function createRunTimeMain() {
       generateMainFile()
       // 写入router文件
       generateRouteFile(config)
+      // 写入html
+      generateMainHtml(config.ujsConfig)
     },
   }
 }
 
+async function generateMainHtml(config: ResolvedConfig) {
+  const rootPath = resolve(process.cwd(), runTimeDirectory)
+  const htmlContent = await createHtml(config)
+  generateFile({
+    path: rootPath,
+    fileName: mainHtml,
+    content: htmlContent,
+  }).catch((e) => {
+    console.log('Failed to write entry file', e)
+  })
+}
+
 function generateAppVueFile() {
-  const rootPath = resolve(process.cwd(), '.ujs')
+  const rootPath = resolve(process.cwd(), runTimeDirectory)
   const appVueContent = createAppVueContent()
   generateFile({
     path: rootPath,
@@ -41,7 +62,7 @@ function generateAppVueFile() {
 }
 
 function generateMainFile() {
-  const rootPath = resolve(process.cwd(), '.ujs')
+  const rootPath = resolve(process.cwd(), runTimeDirectory)
   const content = createMainContent()
   generateFile({
     path: rootPath,

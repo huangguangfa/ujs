@@ -1,20 +1,10 @@
 import { resolveConfig } from '../config'
-import { build as bundlerViteBuild } from 'vite'
+import { createBundlerViteBuild } from '../bundler/vite'
 
-import type { InlineConfig, ResolvedConfig } from '../config'
+import type { InlineConfig } from '../config'
 
 export async function build(inlineConfig: InlineConfig = {}) {
   // get config
   const config = await resolveConfig(inlineConfig, 'build', 'production')
-  const bunderBuildConfig = resolveBuildConfig(config, inlineConfig)
-  const stats = await bundlerViteBuild()
-  console.log(stats, bunderBuildConfig)
-}
-
-function resolveBuildConfig(
-  config: ResolvedConfig,
-  inlineConfig: InlineConfig
-) {
-  console.log(config, inlineConfig)
-  return {}
+  await createBundlerViteBuild(config)
 }
