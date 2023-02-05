@@ -2,7 +2,6 @@ import http from 'http'
 import express from 'express'
 import { createViteServer } from './vite'
 import { resolveConfig } from '../config'
-import { resolveHtppOptions } from './http-option'
 import { resolveHostname, resolveServerUrls, getDevBanner } from './utils'
 import { defaultProt } from '../common/constants'
 import chalk from 'chalk'
@@ -27,11 +26,9 @@ export interface ResolvedServerUrls {
 export async function createServer(inlineConfig: InlineConfig = {}) {
   // get config
   const config = await resolveConfig(inlineConfig, 'serve', 'development')
-  // console.log('--- config ----', config)
   // create server
   const app = express()
-  const httpsOptions = await resolveHtppOptions(config)
-  const viteServer = await createViteServer(httpsOptions, config)
+  const viteServer = await createViteServer(config)
 
   // use vite via middleware way
   app.use(viteServer.middlewares)

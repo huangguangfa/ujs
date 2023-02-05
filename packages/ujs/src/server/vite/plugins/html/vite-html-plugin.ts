@@ -1,4 +1,6 @@
 import { createHtml } from './create-html'
+import chalk from 'chalk'
+
 import type { Plugin } from 'vite'
 import type { ResolvedConfig } from '../../../../config'
 
@@ -23,6 +25,7 @@ export default function ViteHtmlPlugin(config: ResolvedConfig): Plugin {
               res.setHeader('Content-Type', 'text/html')
               res.end(await server.transformIndexHtml(req.url, html))
             } catch (e) {
+              console.log(chalk.red('html模版注入异常'))
               return next(e)
             }
           }

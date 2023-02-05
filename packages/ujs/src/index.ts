@@ -1,5 +1,3 @@
-console.log('ujs')
-
 export type Ujs = {
   name: string
 }

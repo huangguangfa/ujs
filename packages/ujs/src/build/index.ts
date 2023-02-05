@@ -1,6 +1,20 @@
-const buildGradientBanner =
-  '\u001b[38;2;116;235;213m正\u001b[39m\u001b[38;2;116;192;235m在\u001b[39m\u001b[38;2;116;127;235m执\u001b[39m\u001b[38;2;170;116;235m行\u001b[39m\u001b[38;2;235;116;235mb\u001b[39m\u001b[38;2;235;116;171mu\u001b[39m\u001b[38;2;236;126;116mi\u001b[39m\u001b[38;2;236;191;116ml\u001b[39m\u001b[38;2;215;236;116md\u001b[39m\u001b[38;2;150;236;116m指\u001b[39m\u001b[38;2;116;236;148m令\u001b[39m\u001b[38;2;116;236;213m!\u001b[39m'
+import { resolveConfig } from '../config'
+import { build as bundlerViteBuild } from 'vite'
 
-export async function build() {
-  console.log(buildGradientBanner)
+import type { InlineConfig, ResolvedConfig } from '../config'
+
+export async function build(inlineConfig: InlineConfig = {}) {
+  // get config
+  const config = await resolveConfig(inlineConfig, 'build', 'production')
+  const bunderBuildConfig = resolveBuildConfig(config, inlineConfig)
+  const stats = await bundlerViteBuild()
+  console.log(stats, bunderBuildConfig)
+}
+
+function resolveBuildConfig(
+  config: ResolvedConfig,
+  inlineConfig: InlineConfig
+) {
+  console.log(config, inlineConfig)
+  return {}
 }

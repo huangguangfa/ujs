@@ -11,7 +11,7 @@ export const wildcardHosts = new Set([
   '0000:0000:0000:0000:0000:0000:0000:0000',
 ])
 
-export const defaultProt = 3006
+export const defaultProt = 3009
 
 export const loopbackHosts = new Set([
   'localhost',
