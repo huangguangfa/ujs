@@ -4,6 +4,9 @@ export default {
     'console.log("body-scripts")',
     '<script>console.log("add body <script>")</script>',
   ],
+  viteConfig: {
+    base: './',
+  },
   routes: [
     {
       path: '/',

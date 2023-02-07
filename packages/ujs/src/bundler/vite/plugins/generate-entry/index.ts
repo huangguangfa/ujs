@@ -38,7 +38,7 @@ export default function createRunTimeMain() {
 }
 
 async function generateMainHtml(config: ResolvedConfig) {
-  const rootPath = resolve(process.cwd(), runTimeDirectory)
+  const rootPath = resolve(process.cwd())
   const htmlContent = await createHtml(config)
   generateFile({
     path: rootPath,
