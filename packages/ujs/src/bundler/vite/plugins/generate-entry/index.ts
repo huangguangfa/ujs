@@ -26,19 +26,19 @@ export default function createRunTimeMain() {
         fs.mkdirSync(rootPath)
       }
       // app.vue文件写入
-      generateAppVueFile()
+      await generateAppVueFile()
       // 入口文件写入
-      generateMainFile()
+      await generateMainFile()
       // 写入router文件
-      generateRouteFile(config)
+      await generateRouteFile(config)
       // 写入html
-      generateMainHtml(config.ujsConfig)
+      await generateMainHtml(config.ujsConfig)
     },
   }
 }
 
 async function generateMainHtml(config: ResolvedConfig) {
-  const rootPath = resolve(process.cwd())
+  const rootPath = resolve(process.cwd(), runTimeDirectory)
   const htmlContent = await createHtml(config)
   generateFile({
     path: rootPath,
@@ -74,7 +74,7 @@ function generateMainFile() {
 }
 
 async function generateRouteFile(config: ResolvedConfig) {
-  const rootPath = resolve(process.cwd(), '.ujs')
+  const rootPath = resolve(process.cwd(), runTimeDirectory)
   const routes = await getRoutes(config)
   const routeComponents = await getRouteComponents({
     routes,
